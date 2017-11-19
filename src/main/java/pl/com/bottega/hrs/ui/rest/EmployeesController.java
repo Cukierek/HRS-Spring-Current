@@ -8,20 +8,11 @@ import pl.com.bottega.hrs.model.commands.*;
 public class EmployeesController {
 
     private EmployeeFinder employeeFinder;
-    private ChangeSalaryHandler changeSalaryHandler;
-    private ChangeEmployeeTitleHandler changeEmployeeTitleHandler;
-    private DepartmentAssignmentHandler departmentAssignmentHandler;
-    private UnassignDepartmentHandler unassignDepartmentHandler;
-    private ChangeEmployeeProfileHandler changeEmployeeProfileHandler;
+    private CommandGateway gateway;
 
-    public EmployeesController(EmployeeFinder employeeFinder, ChangeSalaryHandler changeSalaryHandler,
-                               ChangeEmployeeTitleHandler changeEmployeeTitleHandler, DepartmentAssignmentHandler departmentAssignmentHandler, UnassignDepartmentHandler unassignDepartmentHandler, ChangeEmployeeProfileHandler changeEmployeeProfileHandler){
+    public EmployeesController(EmployeeFinder employeeFinder, CommandGateway gateway){
         this.employeeFinder = employeeFinder;
-        this.changeSalaryHandler = changeSalaryHandler;
-        this.changeEmployeeTitleHandler = changeEmployeeTitleHandler;
-        this.departmentAssignmentHandler = departmentAssignmentHandler;
-        this.unassignDepartmentHandler = unassignDepartmentHandler;
-        this.changeEmployeeProfileHandler = changeEmployeeProfileHandler;
+        this.gateway = gateway;
     }
 
     @GetMapping("/employees/{empNo}")
@@ -40,7 +31,7 @@ public class EmployeesController {
     public DetailedEmployeeDto changeSalary(@PathVariable Integer empNo, @RequestBody ChangeSalaryCommand cmd) {
 
         cmd.setEmpNo(empNo);
-        changeSalaryHandler.handle(cmd);
+        gateway.execute(cmd);
         return employeeFinder.getEmployeeDetails(empNo);
     }
 
@@ -48,7 +39,7 @@ public class EmployeesController {
     public DetailedEmployeeDto changeTitle(@PathVariable Integer empNo, @RequestBody ChangeEmployeeTitleCommand cmd) {
 
         cmd.setEmpNo(empNo);
-        changeEmployeeTitleHandler.handle(cmd);
+        gateway.execute(cmd);
         return employeeFinder.getEmployeeDetails(empNo);
     }
 
@@ -57,7 +48,7 @@ public class EmployeesController {
                                                   @RequestBody AssignDepartmentToEmployeeCommand cmd) {
 
         cmd.setEmpNo(empNo);
-        departmentAssignmentHandler.handle(cmd);
+        gateway.execute(cmd);
         return employeeFinder.getEmployeeDetails(empNo);
     }
 
@@ -66,14 +57,14 @@ public class EmployeesController {
                                                       @RequestBody UnassignDepartmentCommand cmd) {
 
         cmd.setEmpNo(empNo);
-        unassignDepartmentHandler.handle(cmd);
+        gateway.execute(cmd);
         return employeeFinder.getEmployeeDetails(empNo);
     }
 
     @PutMapping("/employees/{empNo}")
     public DetailedEmployeeDto updateProfile(@PathVariable Integer empNo, @RequestBody ChangeEmployeeProfileCommand cmd) {
         cmd.setEmpNo(empNo);
-        changeEmployeeProfileHandler.handle(cmd);
+        gateway.execute(cmd);
         return employeeFinder.getEmployeeDetails(empNo);
     }
 

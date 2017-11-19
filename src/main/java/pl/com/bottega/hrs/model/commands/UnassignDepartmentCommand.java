@@ -1,6 +1,6 @@
 package pl.com.bottega.hrs.model.commands;
 
-public class UnassignDepartmentCommand {
+public class UnassignDepartmentCommand implements Command  {
     private Integer empNo;
     private String deptNo;
 

@@ -1,6 +1,6 @@
 package pl.com.bottega.hrs.model.commands;
 
-public class AddDepartmentCommand {
+public class AddDepartmentCommand implements Command {
 
     private String number, name;
 

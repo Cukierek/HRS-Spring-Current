@@ -1,6 +1,6 @@
 package pl.com.bottega.hrs.model.commands;
 
-public class FireEmployeeCommand {
+public class FireEmployeeCommand implements Command  {
 
     private int empNo;
 

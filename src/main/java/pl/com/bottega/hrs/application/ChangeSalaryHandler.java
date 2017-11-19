@@ -4,10 +4,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.com.bottega.hrs.model.Employee;
 import pl.com.bottega.hrs.model.commands.ChangeSalaryCommand;
+import pl.com.bottega.hrs.model.commands.Command;
 import pl.com.bottega.hrs.model.repositories.EmployeeRepository;
 
 @Component
-public class ChangeSalaryHandler {
+public class ChangeSalaryHandler implements Handler<ChangeSalaryCommand> {
 
     private EmployeeRepository repository;
 
@@ -20,5 +21,10 @@ public class ChangeSalaryHandler {
         Employee employee = repository.get(cmd.getEmpNo());
         employee.changeSalary(cmd.getAmount());
         repository.save(employee);
+    }
+
+    @Override
+    public Class<? extends Command> getSupportedCommandClass() {
+        return ChangeSalaryCommand.class;
     }
 }

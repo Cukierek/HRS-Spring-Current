@@ -6,11 +6,12 @@ import pl.com.bottega.hrs.model.Department;
 import pl.com.bottega.hrs.model.Employee;
 import pl.com.bottega.hrs.model.TimeProvider;
 import pl.com.bottega.hrs.model.commands.AddEmployeeCommand;
+import pl.com.bottega.hrs.model.commands.Command;
 import pl.com.bottega.hrs.model.repositories.DepartmentRepository;
 import pl.com.bottega.hrs.model.repositories.EmployeeRepository;
 
 @Component
-public class AddEmployeeHandler {
+public class AddEmployeeHandler implements Handler<AddEmployeeCommand> {
 
     private EmployeeRepository repository;
     private DepartmentRepository departmentRepository;
@@ -39,6 +40,11 @@ public class AddEmployeeHandler {
         Department department = departmentRepository.get(cmd.getDeptNo());
         employee.assignDepartment(department);
         repository.save(employee);
+    }
+
+    @Override
+    public Class<? extends Command> getSupportedCommandClass() {
+        return AddEmployeeCommand.class;
     }
 
 

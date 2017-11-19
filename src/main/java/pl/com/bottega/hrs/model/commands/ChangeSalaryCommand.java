@@ -1,6 +1,6 @@
 package pl.com.bottega.hrs.model.commands;
 
-public class ChangeSalaryCommand {
+public class ChangeSalaryCommand implements Command  {
 
     private Integer empNo;
     private Integer amount;

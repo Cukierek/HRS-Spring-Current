@@ -6,7 +6,7 @@ import pl.com.bottega.hrs.model.Gender;
 
 import java.time.LocalDate;
 
-public class ChangeEmployeeProfileCommand {
+public class ChangeEmployeeProfileCommand implements Command  {
 
     private String firstName, lastName;
 

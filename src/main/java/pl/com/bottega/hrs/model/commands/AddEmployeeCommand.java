@@ -5,7 +5,7 @@ import pl.com.bottega.hrs.model.Gender;
 
 import java.time.LocalDate;
 
-public class AddEmployeeCommand {
+public class AddEmployeeCommand implements Command  {
 
     private String firstName, lastName;
 
