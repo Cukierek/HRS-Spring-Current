@@ -6,7 +6,10 @@ public class BasicEmployeeDto {
 
     private String firstName, lastName;
 
-    public BasicEmployeeDto(Integer empNo, String firstName, String lastName) {
+	public BasicEmployeeDto() {
+	}
+
+	public BasicEmployeeDto(Integer empNo, String firstName, String lastName) {
         this.empNo = empNo;
         this.firstName = firstName;
         this.lastName = lastName;

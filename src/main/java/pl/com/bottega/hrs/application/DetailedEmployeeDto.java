@@ -2,14 +2,23 @@ package pl.com.bottega.hrs.application;
 
 import pl.com.bottega.hrs.model.*;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@XmlRootElement
 public class DetailedEmployeeDto extends BasicEmployeeDto {
 
-    private LocalDate birthDate, hireDate;
+	public DetailedEmployeeDto() {
+	}
+
+	public DetailedEmployeeDto(Integer empNo, String firstName, String lastName) {
+		super(empNo, firstName, lastName);
+	}
+
+	private LocalDate birthDate, hireDate;
 
     private Gender gender;
 
