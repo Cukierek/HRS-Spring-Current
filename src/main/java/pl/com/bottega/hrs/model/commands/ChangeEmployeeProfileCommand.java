@@ -6,7 +6,7 @@ import pl.com.bottega.hrs.model.Gender;
 
 import java.time.LocalDate;
 
-public class ChangeEmployeeProfileCommand implements Command  {
+public class ChangeEmployeeProfileCommand implements Command {
 
     private String firstName, lastName;
 
@@ -65,4 +65,20 @@ public class ChangeEmployeeProfileCommand implements Command  {
     public void setEmpNo(Integer empNo) {
         this.empNo = empNo;
     }
+
+    public void validate(ValidationErrors errors) {
+        if (firstName == null || firstName.trim().length() == 0) {
+            errors.add("firstName", "can't be blank");
+        }
+        if (lastName == null || lastName.trim().length() == 0) {
+            errors.add("lastName", "can't be blank");
+        }
+        if (birthDate == null) {
+            errors.add("birthDate", "can't be blank");
+        }
+        if (birthDate != null && birthDate.isAfter(LocalDate.now())) {
+            errors.add("birthDate", "must be in the past");
+        }
+    }
+
 }

@@ -3,6 +3,8 @@ package pl.com.bottega.hrs.application;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import pl.com.bottega.hrs.model.commands.Command;
+import pl.com.bottega.hrs.model.commands.CommandInvalidException;
+import pl.com.bottega.hrs.model.commands.ValidationErrors;
 
 import java.util.Map;
 import java.util.Optional;
@@ -17,8 +19,16 @@ public class CommandGateway {
     }
 
     public void execute(Command command) {
+        validate(command);
         Handler handler = handlerFor(command);
         handler.handle(command);
+    }
+
+    private void validate(Command command) {
+        ValidationErrors validationErrors = new ValidationErrors();
+        command.validate(validationErrors);
+        if(validationErrors.any())
+            throw new CommandInvalidException(validationErrors);
     }
 
     private Handler handlerFor(Command command) {
