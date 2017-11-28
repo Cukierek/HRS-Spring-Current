@@ -11,4 +11,8 @@ public class FireEmployeeCommand implements Command  {
     public void setEmpNo(int empNo) {
         this.empNo = empNo;
     }
+
+    public void validate(ValidationErrors errors){
+        validatePresence(errors,"empNo", empNo);
+    }
 }

@@ -1,6 +1,6 @@
 package pl.com.bottega.hrs.model.commands;
 
-public class UnassignDepartmentCommand implements Command  {
+public class UnassignDepartmentCommand implements Command {
     private Integer empNo;
     private String deptNo;
 
@@ -18,5 +18,10 @@ public class UnassignDepartmentCommand implements Command  {
 
     public void setDeptNo(String deptNo) {
         this.deptNo = deptNo;
+    }
+
+    public void validate(ValidationErrors errors) {
+        validatePresence(errors, "empNo", empNo);
+        validatePresence(errors, "deptNo", deptNo);
     }
 }

@@ -19,4 +19,9 @@ public class ChangeEmployeeTitleCommand implements Command  {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public void validate(ValidationErrors errors){
+        validatePresence(errors,"empNo", empNo);
+        validatePresence(errors,"title", title);
+    }
 }

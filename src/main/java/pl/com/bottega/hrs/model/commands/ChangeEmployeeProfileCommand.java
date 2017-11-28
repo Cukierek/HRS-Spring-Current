@@ -66,18 +66,17 @@ public class ChangeEmployeeProfileCommand implements Command {
         this.empNo = empNo;
     }
 
-    public void validate(ValidationErrors errors) {
-        if (firstName == null || firstName.trim().length() == 0) {
-            errors.add("firstName", "can't be blank");
-        }
-        if (lastName == null || lastName.trim().length() == 0) {
-            errors.add("lastName", "can't be blank");
-        }
-        if (birthDate == null) {
-            errors.add("birthDate", "can't be blank");
-        }
-        if (birthDate != null && birthDate.isAfter(LocalDate.now())) {
-            errors.add("birthDate", "must be in the past");
+    public void validate(ValidationErrors errors){
+        validatePresence(errors,"firstName", firstName);
+        validatePresence(errors,"lastName", lastName);
+        validatePresence(errors,"birthDate", birthDate);
+        validatePresence(errors,"address.street",address.getStreet());
+        validatePresence(errors,"address.city", address.getCity());
+        validatePresence(errors,"gender",gender);
+        validatePresence(errors,"empNo",empNo);
+
+        if(birthDate != null && birthDate.isAfter(LocalDate.now())){
+            errors.add("birthDate", "mast be in the past");
         }
     }
 

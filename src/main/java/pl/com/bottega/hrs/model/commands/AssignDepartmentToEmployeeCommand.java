@@ -20,4 +20,9 @@ public class AssignDepartmentToEmployeeCommand implements Command  {
     public void setDeptNo(String deptNo) {
         this.deptNo = deptNo;
     }
+
+    public void validate(ValidationErrors errors){
+        validatePresence(errors,"empNo", empNo);
+        validatePresence(errors,"deptNo", deptNo);
+    }
 }

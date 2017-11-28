@@ -19,4 +19,10 @@ public class AddDepartmentCommand implements Command {
     public void setName(String name) {
         this.name = name;
     }
+
+    public void validate(ValidationErrors errors){
+        validatePresence(errors,"number", number);
+        validatePresence(errors,"name", name);
+    }
+
 }

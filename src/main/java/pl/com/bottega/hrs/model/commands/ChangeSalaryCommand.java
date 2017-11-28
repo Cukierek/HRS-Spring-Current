@@ -20,4 +20,9 @@ public class ChangeSalaryCommand implements Command  {
     public void setAmount(Integer amount) {
         this.amount = amount;
     }
+
+    public void validate(ValidationErrors errors){
+        validatePresence(errors,"empNo", empNo);
+        validatePresence(errors,"amount", amount);
+    }
 }
